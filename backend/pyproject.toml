@@ -6,4 +6,10 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "fastapi[standard]>=0.112.1",
+    "pydantic-settings>=2.5.2",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.6.5",
 ]
