@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.analysis-results h3 {
+    font-weight: 600;
+}
+
+.analysis-results ul {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}

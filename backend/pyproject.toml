@@ -5,8 +5,11 @@ description = "Let's build a insurance bot that helps people understand the poli
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "aiofiles>=24.1.0",
+    "anthropic>=0.34.2",
     "fastapi[standard]>=0.112.1",
     "pydantic-settings>=2.5.2",
+    "pypdf>=5.0.0",
 ]
 
 [tool.uv]

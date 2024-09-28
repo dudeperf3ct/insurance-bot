@@ -9,6 +9,7 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
+    UPLOAD_DIR: str = "tmp"
 
 
 settings = Settings()  # type: ignore
