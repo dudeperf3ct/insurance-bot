@@ -1,3 +1,5 @@
+"""PDF document endpoint."""
+
 from fastapi import UploadFile, File, APIRouter, HTTPException
 from fastapi.background import BackgroundTasks
 import hashlib

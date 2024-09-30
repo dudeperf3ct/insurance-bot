@@ -4,9 +4,9 @@ import re
 import os
 import logging
 from pypdf import PdfReader
-from app.core.schema import LLMAgentResponse
+from app.core.schema import LLMAgentResponse, LLMResponse
 from anthropic import Anthropic
-from app.services.prompt import CLASSIFY_PROMPT, SUMMARIZE_PROMPT
+from app.services.prompt import CLASSIFY_PROMPT, SUMMARIZE_PROMPT, CHAT_SYSTEM_PROMPT
 from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
@@ -127,3 +127,58 @@ class LLMAgents:
         )
         logger.info(f"Usage: {response.usage}")
         return str(response.content[0].text)
+
+
+class LLMChatAgent:
+    def __init__(self, pdf_file) -> None:
+        self.pdf_file_path = pdf_file
+        self.llm_client = None
+        self.text = self.extract_text()
+        logger.info(f"Text: {self.text[:500]}")
+
+    def extract_text(self) -> str:
+        """Extract text from pdf.
+
+        Returns:
+            str: Entire contents of pdf as text.
+        """
+        reader = PdfReader(self.pdf_file_path)
+        text = "".join(page.extract_text() for page in reader.pages)
+        return text
+
+    def chat_with_doc(self, query: str) -> LLMResponse:
+        """Use Claude prompt caching for chatting with the policy document.
+
+        Args:
+            query (str): Input question from the user.
+
+        Returns:
+            str: Response from LLM.
+        """
+        if self.llm_client is None:
+            self.llm_client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+
+        response = self.llm_client.beta.prompt_caching.messages.create(
+            model="claude-3-5-sonnet-20240620",
+            max_tokens=1024,
+            system=[
+                {
+                    "type": "text",
+                    "text": f"{CHAT_SYSTEM_PROMPT}",
+                },
+                {
+                    "type": "text",
+                    "text": f"<doc> {self.text} </doc>",
+                    "cache_control": {"type": "ephemeral"},
+                },
+            ],
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"{query}",
+                }
+            ],
+            extra_headers={"anthropic-beta": "prompt-caching-2024-07-31"},
+        )
+        logger.info(f"Usage: {response.usage}")
+        return LLMResponse(answer=str(response.content[0].text))

@@ -19,6 +19,9 @@ export async function getAnalysisStatus(taskId) {
 }
 
 export async function sendMessage(taskId, message) {
-    const response = await axios.post(`${API_BASE_URL}/chat/${taskId}`, { message });
+    const response = await axios.post(`${API_BASE_URL}/chat/${taskId}`, null, {
+        params: { query: message }
+    });
+    console.log(response.data)
     return response.data;
 }

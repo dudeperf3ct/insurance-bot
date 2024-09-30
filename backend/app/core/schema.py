@@ -8,3 +8,7 @@ class LLMAgentResponse(BaseModel):
     what_is_bad: Optional[str] = ""
     what_is_okay: Optional[str] = ""
     youtube_video_rec: Optional[str] = ""
+
+
+class LLMResponse(BaseModel):
+    answer: str

@@ -7,7 +7,7 @@ import Spinner from './components/Layout/Spinner';
 import useAnalysisStatus from './hooks/useAnalysisStatus';
 
 function App() {
-  const [taskId, setTaskId] = useState(null);
+  const [taskId, setTaskId] = useState('498906921500d860d74552df2c913dbf'); // useState(null);
   const { status, result } = useAnalysisStatus(taskId);
 
   const handleUploadSuccess = (newTaskId) => {
@@ -38,9 +38,6 @@ function App() {
                       what_is_okay={result.what_is_okay}
                     />
                     <YouTubeVideo videoUrl={result.youtube_video_rec} />
-                    <div className="h-96">
-                      <Chat taskId={taskId} />
-                    </div>
                   </>
                 ) : (
                   <p className="text-center text-red-600">This document is not an insurance document.</p>
@@ -53,8 +50,20 @@ function App() {
           </div>
         </div>
       </div>
+
+      {status === 'completed' && result && result.is_insurance_doc && (
+        <div className="mt-8 sm:max-w-4xl sm:mx-auto w-full px-4 sm:px-0">
+          <div className="bg-white shadow-lg sm:rounded-3xl sm:p-6 border-4 border-cyan-500">
+            <h2 className="text-xl font-semibold mb-4 text-cyan-700">Chat with Insurance Policy</h2>
+            <div className="h-96">
+              <Chat taskId={taskId} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
 
 export default App;
