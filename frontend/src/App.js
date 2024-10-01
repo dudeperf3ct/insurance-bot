@@ -5,13 +5,17 @@ import YouTubeVideo from './components/AnalysisResults/YouTubeVideo';
 import Chat from './components/Chat/Chat';
 import Spinner from './components/Layout/Spinner';
 import useAnalysisStatus from './hooks/useAnalysisStatus';
+import logo from './logo/insurance_bot.png'
+
 
 function App() {
-  const [taskId, setTaskId] = useState('498906921500d860d74552df2c913dbf'); // useState(null);
+  const [taskId, setTaskId] = useState(null);
   const { status, result } = useAnalysisStatus(taskId);
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleUploadSuccess = (newTaskId) => {
     setTaskId(newTaskId);
+    setIsUploading(false);
   };
 
   return (
@@ -20,9 +24,19 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
         <div className="relative bg-white shadow-lg sm:rounded-3xl sm:p-10">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-2xl font-semibold mb-6">Insurance Policy Analyzer</h1>
-            {!taskId && <FileUpload onUploadSuccess={handleUploadSuccess} />}
-            {taskId && status === 'pending' && (
+            <div className="flex items-center justify-center mb-8">
+              <img src={logo} alt="Insurance Bot Logo" className="h-16 w-16 mr-4" />
+              <h1 className="text-4xl font-bold text-gray-800 tracking-tight">
+                Insurance <span className="text-cyan-600">Bot</span>
+              </h1>
+            </div>
+            {!taskId && !isUploading && (
+              <FileUpload
+                onUploadSuccess={handleUploadSuccess}
+                onUploadStart={() => setIsUploading(true)}
+              />
+            )}
+            {(isUploading || (taskId && status === 'pending')) && (
               <div className="text-center">
                 <Spinner />
                 <p className="mt-4">Analyzing your policy...</p>

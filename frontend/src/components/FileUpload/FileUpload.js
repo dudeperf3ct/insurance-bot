@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
 import { uploadFile } from '../../services/api';
 
-function FileUpload({ onUploadSuccess }) {
+function FileUpload({ onUploadSuccess, onUploadStart }) {
     const [file, setFile] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -32,6 +32,7 @@ function FileUpload({ onUploadSuccess }) {
         if (!file) return;
 
         try {
+            onUploadStart(); // Call this function when upload starts
             const taskId = await uploadFile(file);
             onUploadSuccess(taskId);
         } catch (error) {

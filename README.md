@@ -16,3 +16,11 @@ The platform should:
 The ideal solution will be user-friendly, promote financial literacy, and significantly enhance insurance penetration and consumer satisfaction. Let's use technology to make insurance work for everyone!
 
 ### Getting Started
+
+Pre-requisties
+
+* Docker Compose
+
+```bash
+docker compose build
+```

@@ -50,3 +50,11 @@ Here's a more detailed workflow:
 What about database? How can we use it here? Ideally, we want a database so that frontend can use it to read and display the contents : Pros and Cons and Show the YT video for a uploaded PDF file.
 
 First pass: Let's implement the above workflow. We can refactor it once we decide on frontend.
+
+Frontend
+
+We use React and TailwindCSS for creating a UI. We showcase 3 use-cases
+
+* A comparison of What is Good?, What is Okay? and What is Bad? about the policy
+* A Youtube video that is related to the policy (For now we just mock this by providing )
+* Chat with document that enables user to ask any questions pertaining to the policy.

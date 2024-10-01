@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000'; // Update with your FastAPI server URL
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 
 export async function uploadFile(file) {
     const formData = new FormData();
