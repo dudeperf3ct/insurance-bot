@@ -1,6 +1,10 @@
 # Use an official Node runtime as the base image
 FROM node:lts
 
+# Set env variable
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 # Set the working directory in the container
 WORKDIR /app
 

@@ -29,6 +29,8 @@ ENVIRONMENT="local"
 ANTHROPIC_API_KEY="YOUR_ANTHROPIC_API_KEY"
 ```
 
+An example is shown in [.env.example](./.env.example) file.
+
 ## Accessing the application
 
 The application will be running on `http://localhost:8000`.
