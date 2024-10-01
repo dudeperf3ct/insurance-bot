@@ -1,8 +1,10 @@
 # Insurance Bot 🤖
 
-Hackathon : <https://devfolio.co/google-genaiexchange/challenges>
+![Logo](./frontend/src/logo/insurance_bot.png)
 
 ## Problem Statement
+
+Hackathon : <https://devfolio.co/google-genaiexchange/challenges>
 
 Revolutionize Insurance Accessibility and Trust with AI. Develop an AI-powered humanoid agent that transforms the insurance experience for consumers.
 
@@ -19,8 +21,16 @@ The ideal solution will be user-friendly, promote financial literacy, and signif
 
 Pre-requisties
 
-* Docker Compose
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
 ```bash
-docker compose build
+docker-compose up --build
 ```
+
+There's an additional step to setup up environment variables for the backend application mentioned in the [README.md](./backend/README.md) file.
+
+## Accessing the application
+
+The frontend application will be running on `http://localhost:3000`.
+
+The backend application will be running on `http://localhost:8000`.
